@@ -25,6 +25,9 @@ DATA_DIR = ''  # Directory containing stl-10 dataset
 if len(DATA_DIR) == 0:
     raise Exception('Please specify path to data directory!')
 
+if not tf.test.is_gpu_available():
+    raise Exception('You need a GPU to train the NN')    
+
 N_GPUS = 1
 if N_GPUS != 1:
     raise Exception('Just 1 GPU for now!')
@@ -200,7 +203,7 @@ def nonlinearity(x):
 tree_var = tf.Variable(data_provider.tree_array)
 
 def Normalize(name, inputs,labels=None):
-    """This is messy, but basically it chooses between batchnorm, layernorm, 
+    """This is messy, but basically it chooses between batchnorm, layernorm,
     their conditional variants, or nothing, depending on the value of `name` and
     the global hyperparam flags."""
     if not CONDITIONAL:
