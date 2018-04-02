@@ -4,12 +4,13 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-tensorflow==1.5
-numpy
-sklearn
-scipy
-Pillow
-matplotlib
+tensorflow = "==1.4"
+sklearn = "*"
+numpy = "*"
+scipy = "*"
+pillow = "*"
+matplotlib = "*"
+
 [dev-packages]
 
 [requires]
