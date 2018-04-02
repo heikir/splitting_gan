@@ -23,7 +23,7 @@ locale.setlocale(locale.LC_ALL, '')
 # Download CIFAR-10 (Python version) at
 # https://www.cs.toronto.edu/~kriz/cifar.html and fill in the path to the
 # extracted files here!
-DATA_DIR = ''
+DATA_DIR = '../data'
 if len(DATA_DIR) == 0:
     raise Exception('Please specify path to data directory in gan_cifar.py!')
 
@@ -169,7 +169,7 @@ def nonlinearity(x):
 tree_var = tf.Variable(data_provider.tree_array)
 
 def Normalize(name, inputs,labels=None):
-    """This is messy, but basically it chooses between batchnorm, layernorm, 
+    """This is messy, but basically it chooses between batchnorm, layernorm,
     their conditional variants, or nothing, depending on the value of `name` and
     the global hyperparam flags."""
     if not CONDITIONAL:
@@ -236,9 +236,9 @@ def ResidualBlock(name, input_dim, output_dim, filter_size, inputs, resample=Non
     output = inputs
     output = Normalize(name+'.N1', output, labels=labels)
     output = nonlinearity(output)
-    output = conv_1(name+'.Conv1', filter_size=filter_size, inputs=output)    
+    output = conv_1(name+'.Conv1', filter_size=filter_size, inputs=output)
     output = Normalize(name+'.N2', output, labels=labels)
-    output = nonlinearity(output)            
+    output = nonlinearity(output)
     output = conv_2(name+'.Conv2', filter_size=filter_size, inputs=output)
 
     return shortcut + output
@@ -250,8 +250,8 @@ def OptimizedResBlockDisc1(inputs):
     shortcut = conv_shortcut('Discriminator.1.Shortcut', input_dim=3, output_dim=DIM_D, filter_size=1, he_init=False, biases=True, inputs=inputs)
 
     output = inputs
-    output = conv_1('Discriminator.1.Conv1', filter_size=3, inputs=output)    
-    output = nonlinearity(output)            
+    output = conv_1('Discriminator.1.Conv1', filter_size=3, inputs=output)
+    output = nonlinearity(output)
     output = conv_2('Discriminator.1.Conv2', filter_size=3, inputs=output)
     return shortcut + output
 
