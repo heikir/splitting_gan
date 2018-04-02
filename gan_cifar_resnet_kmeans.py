@@ -152,9 +152,9 @@ class splitting_cifar:
         return new_classes
 
 # Supervised
-data_provider = splitting_cifar()
+# data_provider = splitting_cifar()
 # Unsupervised
-# data_provider = splitting_cifar(unsupervised=True)
+data_provider = splitting_cifar(unsupervised=True)
 
 def extendVariable(var, new_classes):
     updated = var
@@ -334,7 +334,7 @@ with tf.Session() as session:
                 disc_acgan_accs.append(tf.reduce_mean(
                     tf.cast(
                         tf.equal(
-                            tf.to_int32(tf.argmax(disc_all_acgan[:BATCH_SIZE/len(DEVICES_A)], dimension=1)),
+                            tf.to_int32(tf.argmax(disc_all_acgan[:BATCH_SIZE/len(DEVICES_A)], axis=1)),
                             real_and_fake_labels[:BATCH_SIZE/len(DEVICES_A)]
                         ),
                         tf.float32
@@ -343,7 +343,7 @@ with tf.Session() as session:
                 disc_acgan_fake_accs.append(tf.reduce_mean(
                     tf.cast(
                         tf.equal(
-                            tf.to_int32(tf.argmax(disc_all_acgan[BATCH_SIZE/len(DEVICES_A):], dimension=1)),
+                            tf.to_int32(tf.argmax(disc_all_acgan[BATCH_SIZE/len(DEVICES_A):], axis=1)),
                             real_and_fake_labels[BATCH_SIZE/len(DEVICES_A):]
                         ),
                         tf.float32
@@ -479,7 +479,7 @@ with tf.Session() as session:
             locale.format("%d", total_param_count, grouping=True)
         )
 
-    session.run(tf.initialize_all_variables())
+    session.run(tf.global_variables_initializer())
 
     gen = inf_train_gen()
 
