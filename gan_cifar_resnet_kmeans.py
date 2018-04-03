@@ -27,8 +27,8 @@ DATA_DIR = '../data'
 if len(DATA_DIR) == 0:
     raise Exception('Please specify path to data directory in gan_cifar.py!')
 
-if not tf.test.is_gpu_available():
-    raise Exception('You need a GPU to train the NN')
+#if not tf.test.is_gpu_available():
+#    raise Exception('You need a GPU to train the NN')
 
 N_GPUS = 1
 if N_GPUS != 1:
