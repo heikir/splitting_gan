@@ -28,8 +28,6 @@ DATA_DIR = '../data'
 if len(DATA_DIR) == 0:
     raise Exception('Please specify path to data directory in gan_cifar.py!')
 
-#if not tf.test.is_gpu_available():
-#    raise Exception('You need a GPU to train the NN')
 
 N_GPUS = 1
 if N_GPUS != 1:
@@ -154,6 +152,11 @@ class splitting_cifar:
         lib.save_images.save_images(all_samples.reshape((self.n_classes*10, 3, 32, 32)), 'cluster_samples_%d.png'%iteration, mod=10)
 
         return new_classes
+
+
+# Check for GPU availability
+if not tf.test.is_gpu_available():
+    raise Exception('You need a GPU to train the NN')
 
 # Supervised
 # data_provider = splitting_cifar()
