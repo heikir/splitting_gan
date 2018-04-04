@@ -1,4 +1,6 @@
 import numpy as np
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = os.environ['SGE_GPU']
 import tensorflow as tf
 
 import locale
@@ -11,13 +13,13 @@ _params_extensible = list()
 def param(name, *args, **kwargs):
     """
     A wrapper for `tf.Variable` which enables parameter sharing in models.
-    
-    Creates and returns theano shared variables similarly to `tf.Variable`, 
-    except if you try to create a param with the same name as a 
-    previously-created one, `param(...)` will just return the old one instead of 
+
+    Creates and returns theano shared variables similarly to `tf.Variable`,
+    except if you try to create a param with the same name as a
+    previously-created one, `param(...)` will just return the old one instead of
     making a new one.
 
-    This constructor also adds a `param` attribute to the shared variables it 
+    This constructor also adds a `param` attribute to the shared variables it
     creates, so that you can easily search a graph for all params.
     """
 
@@ -59,7 +61,7 @@ def delete_param_aliases():
 # def search(node, critereon):
 #     """
 #     Traverse the Theano graph starting at `node` and return a list of all nodes
-#     which match the `critereon` function. When optimizing a cost function, you 
+#     which match the `critereon` function. When optimizing a cost function, you
 #     can use this to get a list of all of the trainable params in the graph, like
 #     so:
 

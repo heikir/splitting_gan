@@ -1,6 +1,8 @@
 import tflib as lib
 
 import numpy as np
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = os.environ['SGE_GPU']
 import tensorflow as tf
 
 _default_weightnorm = False
@@ -18,11 +20,11 @@ def unset_weights_stdev():
     _weights_stdev = None
 
 def Deconv2D(
-    name, 
-    input_dim, 
-    output_dim, 
-    filter_size, 
-    inputs, 
+    name,
+    input_dim,
+    output_dim,
+    filter_size,
+    inputs,
     he_init=True,
     weightnorm=None,
     biases=True,
@@ -95,9 +97,9 @@ def Deconv2D(
             output_shape = tf.stack([input_shape[0], 2*input_shape[1], 2*input_shape[2], output_dim])
 
         result = tf.nn.conv2d_transpose(
-            value=inputs, 
+            value=inputs,
             filter=filters,
-            output_shape=output_shape, 
+            output_shape=output_shape,
             strides=[1, 2, 2, 1],
             padding='SAME'
         )

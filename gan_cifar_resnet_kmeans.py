@@ -12,6 +12,7 @@ import tflib.inception_score
 import tflib.plot
 
 import numpy as np
+os.environ["CUDA_VISIBLE_DEVICES"] = os.environ['SGE_GPU']
 import tensorflow as tf
 from sklearn.cluster import KMeans
 

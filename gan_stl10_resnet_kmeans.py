@@ -13,6 +13,7 @@ import tflib.inception_score
 import tflib.plot
 
 import numpy as np
+os.environ["CUDA_VISIBLE_DEVICES"] = os.environ['SGE_GPU']
 import tensorflow as tf
 from sklearn.cluster import KMeans
 
@@ -26,7 +27,7 @@ if len(DATA_DIR) == 0:
     raise Exception('Please specify path to data directory!')
 
 if not tf.test.is_gpu_available():
-    raise Exception('You need a GPU to train the NN')    
+    raise Exception('You need a GPU to train the NN')
 
 N_GPUS = 1
 if N_GPUS != 1:

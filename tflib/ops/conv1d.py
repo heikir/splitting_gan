@@ -1,6 +1,8 @@
 import tflib as lib
 
 import numpy as np
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = os.environ['SGE_GPU']
 import tensorflow as tf
 
 _default_weightnorm = False
@@ -21,7 +23,7 @@ def Conv1D(name, input_dim, output_dim, filter_size, inputs, he_init=True, mask_
             mask_type, mask_n_channels = mask_type
 
             mask = np.ones(
-                (filter_size, input_dim, output_dim), 
+                (filter_size, input_dim, output_dim),
                 dtype='float32'
             )
             center = filter_size // 2
@@ -86,8 +88,8 @@ def Conv1D(name, input_dim, output_dim, filter_size, inputs, he_init=True, mask_
                 filters = filters * mask
 
         result = tf.nn.conv1d(
-            value=inputs, 
-            filters=filters, 
+            value=inputs,
+            filters=filters,
             stride=stride,
             padding='SAME',
             data_format='NCHW'

@@ -1,6 +1,8 @@
 import tflib as lib
 
 import numpy as np
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = os.environ['SGE_GPU']
 import tensorflow as tf
 
 def Batchnorm(name, axes, inputs, is_training=None, stats_iter=None, update_moving_stats=True, fused=True):
@@ -41,7 +43,7 @@ def Batchnorm(name, axes, inputs, is_training=None, stats_iter=None, update_movi
             #     inputs,
             #     scale,
             #     offset,
-            #     epsilon=1e-2, 
+            #     epsilon=1e-2,
             #     mean=moving_mean,
             #     variance=moving_variance,
             #     is_training=False,

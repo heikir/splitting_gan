@@ -1,6 +1,8 @@
 import tflib as lib
 
 import numpy as np
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = os.environ['SGE_GPU']
 import tensorflow as tf
 
 _default_weightnorm = False
@@ -22,9 +24,9 @@ def unset_weights_stdev():
     _weights_stdev = None
 
 def Linear(
-        name, 
-        input_dim, 
-        output_dim, 
+        name,
+        input_dim,
+        output_dim,
         inputs,
         biases=True,
         initialization=None,
@@ -76,7 +78,7 @@ def Linear(
 
         elif initialization == 'orthogonal' or \
             (initialization == None and input_dim == output_dim):
-            
+
             # From lasagne
             def sample(shape):
                 if len(shape) < 2:
@@ -91,9 +93,9 @@ def Linear(
                 q = q.reshape(shape)
                 return q.astype('float32')
             weight_values = sample((input_dim, output_dim))
-        
+
         elif initialization[0] == 'uniform':
-        
+
             weight_values = np.random.uniform(
                 low=-initialization[1],
                 high=initialization[1],
