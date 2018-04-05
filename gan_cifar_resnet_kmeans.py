@@ -35,7 +35,7 @@ if N_GPUS != 1:
 
 BATCH_SIZE = 64 # Critic batch size
 GEN_BS_MULTIPLE = 2 # Generator batch size, as a multiple of BATCH_SIZE
-ITERS = 100000 # How many iterations to train for
+ITERS = 10000 # 10K iterations to train for
 # ResNet-A
 DIM_G = 128 # Generator dimensionality
 DIM_D = 128 # Critic dimensionality
