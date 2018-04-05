@@ -29,9 +29,9 @@ if len(DATA_DIR) == 0:
     raise Exception('Please specify path to data directory in gan_cifar.py!')
 
 
-N_GPUS = 1
-if N_GPUS != 1:
-    raise Exception('Just 1 GPU for now!')
+N_GPUS = 2
+#if N_GPUS != 1:
+#    raise Exception('Just 1 GPU for now!')
 
 BATCH_SIZE = 64 # Critic batch size
 GEN_BS_MULTIPLE = 2 # Generator batch size, as a multiple of BATCH_SIZE
